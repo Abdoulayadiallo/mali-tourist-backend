@@ -16,6 +16,7 @@ public class Pays {
 
     private String nom_pays;
 
+    @Column(columnDefinition = "text")
     private String description;
 
    // @OneToMany(mappedBy = "pays")

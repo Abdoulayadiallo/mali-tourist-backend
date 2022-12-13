@@ -1,7 +1,9 @@
 package com.example.ApiTourist.model;
 
+import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,11 +19,10 @@ public class Commentaire {
     /*Cette annotation spécifie les stratégies de génération pour les valeurs
     des clés primaires : La valeur peut être AUTO, TABLE, SEQUENCE ou IDENTITY. */
     private long id;
-    private String nom;
-    private Date date = new Date();
+    private String contenu;
+    @CreationTimestamp
+    private Date date;
 
-    @ManyToOne
-    private Region region;
 
     @ManyToOne
     private Utilisateur utilisateur;

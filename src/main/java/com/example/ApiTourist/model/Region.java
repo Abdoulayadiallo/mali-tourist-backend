@@ -2,9 +2,11 @@ package com.example.ApiTourist.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +26,14 @@ public class Region {
     private String activité;
     private String Superficie;
     private String langue;
+    @Column(columnDefinition = "text")
     private String description;
 
     @ManyToOne
     private Pays pays;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Commentaire> commentaires;
 
     @ManyToMany
     @JoinTable(

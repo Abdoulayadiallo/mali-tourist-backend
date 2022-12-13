@@ -25,19 +25,19 @@ Il est utilisé dans et avec les @Controller et les @RestController.*/
 public class RegionController {
     @Autowired
     RegionService regionService;
-    @ApiOperation(value = "Ajouter une region ")
+/*    @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
-    /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
+    *//*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*//*
     public Region ajout(@RequestBody Region region){
         return regionService.ajout(region);
 
 
-    }
+    }*/
 
 
     @ApiOperation(value = "afficher la liste des regions ")
     @GetMapping("/mylist")
-    public List<Object[]> l(){
+    public List<Region> l(){
 
         return regionService.lister();
     }
