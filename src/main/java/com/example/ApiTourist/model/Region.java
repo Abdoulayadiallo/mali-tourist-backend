@@ -21,6 +21,7 @@ public class Region {
     /*Cette annotation spécifie les stratégies de génération pour les valeurs
     des clés primaires : La valeur peut être AUTO, TABLE, SEQUENCE ou IDENTITY. */
     private long id;
+    private String image;
     private String coderegion;
     private String nomregion;
     private String activité;

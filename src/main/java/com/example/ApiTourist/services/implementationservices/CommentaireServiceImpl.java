@@ -8,10 +8,12 @@ import com.example.ApiTourist.repository.CommentaireRepository;
 import com.example.ApiTourist.repository.UtilisateurRepository;
 import com.example.ApiTourist.services.CommentaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class CommentaireServiceImpl implements CommentaireService {
     @Autowired
     CommentaireRepository commentaireRepository;

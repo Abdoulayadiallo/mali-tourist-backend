@@ -6,7 +6,10 @@ import com.example.ApiTourist.services.RegionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +28,21 @@ Il est utilisé dans et avec les @Controller et les @RestController.*/
 public class RegionController {
     @Autowired
     RegionService regionService;
-/*    @ApiOperation(value = "Ajouter une region ")
+    @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
-    *//*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*//*
-    public Region ajout(@RequestBody Region region){
-        return regionService.ajout(region);
+    //*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*//*
+    public ResponseEntity<?> ajout(@RequestBody Region region,@RequestBody String postImageName){
+        postImageName = RandomStringUtils.randomAlphabetic(10);
+        try {
+            regionService.ajout(region, postImageName);
+            System.out.println("Region Ajouté");
+            return new ResponseEntity<>(region, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Une erreur est survenue: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
 
-    }*/
+    }
 
 
     @ApiOperation(value = "afficher la liste des regions ")
@@ -51,15 +61,22 @@ public class RegionController {
     @PutMapping("/update/{id}")
     /*on envoie la variable ID*/
     public String  update(@RequestBody Region region,@PathVariable Long id){
-        this.regionService.Modifier(region,id);
+        regionService.Modifier(region,id);
                 return"mise à jour valider";
     }
     @ApiOperation(value = "Supprimer une region par Id")
     @DeleteMapping("/delete/{id}")
-    public String supp(@PathVariable Long id){
-        this.regionService.SupprimerbyId(id);
-        return"region supprimer avec Succès";
-
+    public ResponseEntity<?> deleteRegion(@PathVariable("id") Long id) {
+        Region region = regionService.getPostById(id);
+        if (region == null) {
+            return new ResponseEntity<>("region non trouvé", HttpStatus.NOT_FOUND);
+        }
+        try {
+            regionService.SupprimerbyId(region);
+            return new ResponseEntity<>(region, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Une erreur est survenue: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

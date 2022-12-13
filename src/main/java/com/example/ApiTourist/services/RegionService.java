@@ -10,9 +10,11 @@ public interface RegionService {
 
     List<Region> lister();
     Region Modifier(Region region , Long id);
-    String SupprimerbyId(Long id);
+    Region SupprimerbyId(Region region);
 
     Iterable<Object[]> listersanspays();
 
-    String savePostImage(MultipartFile multipartFile, String fileName);
+    String saveRegionImage(MultipartFile multipartFile, String fileName);
+
+    Region getPostById(Long id);
 }

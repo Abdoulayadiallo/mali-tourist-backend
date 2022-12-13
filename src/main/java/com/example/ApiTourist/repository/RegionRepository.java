@@ -13,6 +13,9 @@ import java.util.List;
 public interface RegionRepository extends JpaRepository<Region, Long> {
     Region findAllById(Long id);
 
+    Region getRegionById(Long id);
+
+
     @Query(value ="SELECT region.nomregion,region.coderegion, pays.id_pays From region,pays WHERE pays_id_pays=pays.id_pays ",nativeQuery = true)
     Iterable<Object[]> MesRegionsansPays();
 

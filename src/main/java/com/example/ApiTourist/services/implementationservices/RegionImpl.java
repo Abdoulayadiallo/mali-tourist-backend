@@ -1,6 +1,7 @@
 package com.example.ApiTourist.services.implementationservices;
 
 import com.example.ApiTourist.model.Region;
+import com.example.ApiTourist.model.Utilisateur;
 import com.example.ApiTourist.repository.RegionRepository;
 import com.example.ApiTourist.services.RegionService;
 import com.example.ApiTourist.util.Constants;
@@ -13,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -20,8 +23,10 @@ public class RegionImpl implements RegionService {
     @Autowired
     RegionRepository regionRepository;
     @Override
-    public Region ajout(Region region,String PostImageName) {
-        return regionRepository.save(region);
+    public Region ajout(Region region, String postImageName) {
+        region.setImage(postImageName);
+        regionRepository.save(region);
+        return region;
     }
 
     @Override
@@ -33,6 +38,7 @@ public class RegionImpl implements RegionService {
     public Region Modifier(Region region, Long id) {
         Region r = this.regionRepository.findById(id).orElseThrow();
         r.setActivité(region.getActivité());
+        r.setImage(r.getImage());
         r.setNomregion(region.getNomregion());
         r.setCoderegion(region.getCoderegion());
         r.setLangue(region.getLangue());
@@ -41,9 +47,14 @@ public class RegionImpl implements RegionService {
     }
 
     @Override
-    public String SupprimerbyId(Long id) {
-       this.regionRepository.deleteById(id);
-       return "Region supprimée avec succes";
+    public Region SupprimerbyId(Region region) {
+        try {
+            Files.deleteIfExists(Paths.get(Constants.REGION_FOLDER + "/" + region.getImage() + ".png"));
+            regionRepository.deleteRegionById(region.getId());
+            return region;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -52,7 +63,7 @@ public class RegionImpl implements RegionService {
     }
 
     @Override
-    public String savePostImage(MultipartFile multipartFile, String fileName) {
+    public String saveRegionImage(MultipartFile multipartFile, String fileName) {
         /*
          * MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)
          * request; Iterator<String> it = multipartRequest.getFileNames(); MultipartFile
@@ -71,4 +82,8 @@ public class RegionImpl implements RegionService {
         return "Photo enregistré avec succès!";
     }
 
+    @Override
+    public Region getPostById(Long id) {
+        return regionRepository.findRegionById(id);
+    }
 }
