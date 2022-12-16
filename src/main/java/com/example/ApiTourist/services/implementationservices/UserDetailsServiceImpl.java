@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Username " + username + " non trouvé");
 		}
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		Set<UtilisateurRole> userRoles = utilisateur.getUserRoles();
+		Set<UtilisateurRole> userRoles = utilisateur.getUtilisateurRoles();
 		userRoles.forEach(userRole -> {
 			authorities.add(new SimpleGrantedAuthority(userRoles.toString()));
 		});

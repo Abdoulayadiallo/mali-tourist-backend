@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static final String[] PUBLIC_MATCHERS = {"/utilisateur/login", "/utilisateur/register", "/utilisateur/resetPassword/**", "/image/**" };
+	private static final String[] PUBLIC_MATCHERS = {"/utilisateur/login", "/utilisateur/register","/utilisateur/role", "/utilisateur/resetPassword/**", "/image/**" };
 //	private static final String[] PUBLIC_MATCHERS = { "/**" };
 	
 	@Autowired

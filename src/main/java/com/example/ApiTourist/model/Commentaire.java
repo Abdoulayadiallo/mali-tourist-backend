@@ -6,13 +6,16 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity/*Cette annotation spécifie que la classe est une entité : et sera enregistré dans la BDD */
 @Getter/*de lombok */
 @Setter/*de lombok */
-public class Commentaire {
+public class Commentaire implements Serializable {
+
+    private static final long serialVersionUID = 164669782975869L;
 
     @Id /*Cette annotation spécifie la clé primaire de l’entité :*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)

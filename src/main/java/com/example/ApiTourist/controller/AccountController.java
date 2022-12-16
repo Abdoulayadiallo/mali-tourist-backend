@@ -1,5 +1,6 @@
 package com.example.ApiTourist.controller;
 
+import com.example.ApiTourist.model.Role;
 import com.example.ApiTourist.model.Utilisateur;
 import com.example.ApiTourist.services.AccountService;
 import org.apache.commons.lang3.StringUtils;
@@ -64,7 +65,7 @@ public class AccountController {
             Utilisateur utilisateur = accountService.saveUser(nom, prenom, username, email);
             return new ResponseEntity<>(utilisateur, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("une erreur est survenue", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Une erreur est survenue incription", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -79,7 +80,7 @@ public class AccountController {
             accountService.updateUser(utilisateur, request);
             return new ResponseEntity<>(utilisateur, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("UNe erreur est survenue", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Une erreur est survenue", HttpStatus.BAD_REQUEST);
         }
     }
     @PostMapping("/changePassword")
@@ -125,6 +126,12 @@ public class AccountController {
         String username = mapper.get("username");
         Utilisateur utilisateur = accountService.findByUsername(username);
         accountService.deleteUser(utilisateur);
-        return new ResponseEntity<String>("User Deleted Successfully!", HttpStatus.OK);
+        return new ResponseEntity<String>("Utilisateur supprimé avec succès!", HttpStatus.OK);
+    }
+
+    @PostMapping("/role")
+    public ResponseEntity<String> AddNewRole(@RequestBody Role role) {
+        accountService.addNewRole(role);
+        return new ResponseEntity<String>("Role Ajouté avec succès!", HttpStatus.OK);
     }
 }

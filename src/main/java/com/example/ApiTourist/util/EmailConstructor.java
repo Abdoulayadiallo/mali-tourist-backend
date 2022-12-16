@@ -52,7 +52,7 @@ public class EmailConstructor {
 				MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
 				email.setPriority(1);
 				email.setTo(utilisateur.getEmail());
-				email.setSubject("New Password - Orchard");
+				email.setSubject("Nouveau mots de passe - Malitourist");
 				email.setText(text, true);
 				email.setFrom(new InternetAddress(env.getProperty("support.email")));
 			}
@@ -70,7 +70,7 @@ public class EmailConstructor {
 				MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
 				email.setPriority(1);
 				email.setTo(utilisateur.getEmail());
-				email.setSubject("Profile Update - Orchard");
+				email.setSubject("Profile Modifié - Malitourist");
 				email.setText(text, true);
 				email.setFrom(new InternetAddress(env.getProperty("support.email")));
 			}

@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
 		utilisateur.setEmail(email);
 		Set<UtilisateurRole> utilisateurRoles = new HashSet<>();
 		utilisateurRoles.add(new UtilisateurRole(utilisateur, accountService.findUserRoleByName("USER")));
-		utilisateur.setUserRoles(utilisateurRoles);
+		utilisateur.setUtilisateurRoles(utilisateurRoles);
 		utilisateurRepository.save(utilisateur);
 		byte[] bytes;
 		try {
@@ -138,7 +138,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Utilisateur findUserById(Long id) {
-		return utilisateurRepository.findUserById(id);
+		return utilisateurRepository.findUtilisateurById(id);
 	}
 
 	@Override
@@ -175,10 +175,26 @@ public class AccountServiceImpl implements AccountService {
 			bytes = multipartFile.getBytes();
 			Path path = Paths.get(Constants.USER_FOLDER + userImageId + ".png");
 			Files.write(path, bytes);
-			return "User picture saved to server";
+			return "La photo de l'utilisateur enregistrée sur le serveur.";
 		} catch (IOException e) {
-			return "User picture Saved";
+			return "La photo de l'utilisateur enregistrée";
 		}
 	}
 
-}
+	@Override
+	public Role addNewRole(Role appRole) {
+		if(appRole.getRoleName() != null){
+			return roleRepository.save(appRole);
+		}else {
+			try {
+				throw new Exception();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+			return appRole;
+		}
+	}
+
+

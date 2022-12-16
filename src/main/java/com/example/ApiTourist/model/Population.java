@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "population")
-public class Population {
+public class Population implements Serializable {
+    private static final long serialVersionUID = 164669782975869L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id_population; /*doit etre recuperer dans la table Region*/

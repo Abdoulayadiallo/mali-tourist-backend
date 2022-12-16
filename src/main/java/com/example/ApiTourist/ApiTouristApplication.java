@@ -18,4 +18,5 @@ public class ApiTouristApplication {
 		SpringApplication.run(ApiTouristApplication.class, args);
 	}
 
+
 }

@@ -14,7 +14,8 @@ import java.util.Set;
 @Entity/*Cette annotation spécifie que la classe est une entité : et sera enregistré dans la BDD */
 @Getter/*de lombok */
 @Setter/*de lombok */
-public class Region {
+public class Region implements Serializable{
+    private static final long serialVersionUID = 164669782975869L;
 
     @Id /*Cette annotation spécifie la clé primaire de l’entité :*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)

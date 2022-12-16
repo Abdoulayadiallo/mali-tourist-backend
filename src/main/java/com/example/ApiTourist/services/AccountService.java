@@ -36,4 +36,6 @@ public interface AccountService {
     public List<Utilisateur> getUsersListByUsername(String username);
 
     public String saveUserImage(MultipartFile multipartFile, Long userImageId);
+
+    Role addNewRole(Role Role);
 }
