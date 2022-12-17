@@ -3,6 +3,7 @@ package com.example.ApiTourist.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 164669782975869L;
 

@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
+import com.example.ApiTourist.model.Erole;
 import com.example.ApiTourist.model.Role;
 import com.example.ApiTourist.model.Utilisateur;
 import com.example.ApiTourist.model.UtilisateurRole;
@@ -62,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 		utilisateur.setUsername(username);
 		utilisateur.setEmail(email);
 		Set<UtilisateurRole> utilisateurRoles = new HashSet<>();
-		utilisateurRoles.add(new UtilisateurRole(utilisateur, accountService.findUserRoleByName("USER")));
+		utilisateurRoles.add(new UtilisateurRole(utilisateur, accountService.findUserRoleByName(Erole.USER)));
 		utilisateur.setUtilisateurRoles(utilisateurRoles);
 		utilisateurRepository.save(utilisateur);
 		byte[] bytes;
@@ -108,8 +106,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Role findUserRoleByName(String name) {
-		return roleRepository.findRoleByRoleName(name);
+	public Role findUserRoleByName(Erole name) {
+		return roleRepository.findByRoleName(name);
 	}
 
 	@Override

@@ -25,6 +25,6 @@ public class Role implements Serializable {
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<UtilisateurRole> userRoles = new HashSet<>();
+    private Set<UtilisateurRole> utilisateurRoles = new HashSet<>();
 
 }

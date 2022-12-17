@@ -1,5 +1,6 @@
 package com.example.ApiTourist.services;
 
+import com.example.ApiTourist.model.Erole;
 import com.example.ApiTourist.model.Region;
 import com.example.ApiTourist.model.Role;
 import com.example.ApiTourist.model.Utilisateur;
@@ -7,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountService {
     public Utilisateur saveUser(String nom,String prenom, String username, String email);
@@ -17,7 +19,7 @@ public interface AccountService {
 
     public List<Utilisateur> userList();
 
-    public Role findUserRoleByName(String string);
+    public Role findUserRoleByName(Erole roleName);
 
     public Role saveRole(Role role);
 

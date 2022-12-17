@@ -15,14 +15,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static final String[] PUBLIC_MATCHERS = {"/utilisateur/login", "/utilisateur/register","/utilisateur/role", "/utilisateur/resetPassword/**", "/image/**" };
+	private static final String[] PUBLIC_MATCHERS = {"/utilisateur/login", "/utilisateur/register","/utilisateur/role", "/utilisateur/resetPassword/**", "/static/image/**"};
 //	private static final String[] PUBLIC_MATCHERS = { "/**" };
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {	
 		auth

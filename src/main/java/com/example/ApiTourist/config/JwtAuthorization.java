@@ -26,6 +26,7 @@ public class JwtAuthorization extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
+		System.out.println("JwtAuthorization");
 		response.addHeader("Access-Control-Allow-Origin", SecurityConstants.CLIENT_DOMAIN_URL);
 
 		response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, "
