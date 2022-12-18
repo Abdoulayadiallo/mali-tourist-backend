@@ -12,10 +12,11 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class UtilisateurRole implements Serializable {
 
@@ -34,7 +35,15 @@ public class UtilisateurRole implements Serializable {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	public UtilisateurRole(Utilisateur utilisateur, Role role) {
-
+	public UtilisateurRole(long userRoleId, Utilisateur utilisateur, Role role) {
+		this.userRoleId = userRoleId;
+		this.utilisateur = utilisateur;
+		this.role = role;
 	}
+
+	public UtilisateurRole(Utilisateur utilisateur, Role role) {
+		this.utilisateur = utilisateur;
+		this.role = role;
+	}
+
 }

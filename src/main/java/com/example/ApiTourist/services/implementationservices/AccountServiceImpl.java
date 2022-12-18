@@ -59,8 +59,12 @@ public class AccountServiceImpl implements AccountService {
 		utilisateur.setPrenom(prenom);
 		utilisateur.setUsername(username);
 		utilisateur.setEmail(email);
+		if(utilisateur.getDateCreation() == null){
+			utilisateur.setDateCreation(new Date());
+		}
+
 		Set<UtilisateurRole> utilisateurRoles = new HashSet<>();
-		utilisateurRoles.add(new UtilisateurRole(utilisateur, accountService.findUserRoleByName(Erole.USER)));
+		utilisateurRoles.add(new UtilisateurRole(utilisateur, roleRepository.findByRoleName(Erole.USER)));
 		utilisateur.setUtilisateurRoles(utilisateurRoles);
 		utilisateurRepository.save(utilisateur);
 		byte[] bytes;
@@ -121,11 +125,13 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Utilisateur updateUser(Utilisateur utilisateur, HashMap<String, String> request) {
 		String nom = request.get("nom");
-		// String username = request.get("username");
+		String prenom = request.get("prenom");
+		String username = request.get("username");
 		String email = request.get("email");
 		String bio = request.get("bio");
 		utilisateur.setNom(nom);
-		// appUser.setUsername(username);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setUsername(username);
 		utilisateur.setEmail(email);
 		utilisateur.setBio(bio);
 		utilisateurRepository.save(utilisateur);

@@ -18,7 +18,6 @@ public class PopulationImpl implements PopulationService {
 
     @Override
     public List<Population> liste() {
-
         return populationRepository.findAll();
     }
 
