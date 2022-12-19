@@ -12,7 +12,6 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 164669782975869L;
 

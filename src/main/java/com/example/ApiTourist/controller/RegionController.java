@@ -19,7 +19,7 @@ import java.util.List;
 Web restful à l’aide de l’annotation,
 il permet de gérer toutes les API REST telles que les requêtes GET, POST, Delete, PUT.*/
 
-@RequestMapping("/ApiTourist/region")
+@RequestMapping("/region")
 /*Elle est utilisée pour traiter les requêtes HTTP avec des modèles d’URL spécifiés.
 Il est utilisé dans et avec les @Controller et les @RestController.*/
 @AllArgsConstructor
