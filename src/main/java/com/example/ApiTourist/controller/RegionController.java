@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -22,28 +24,47 @@ il permet de gérer toutes les API REST telles que les requêtes GET, POST, Dele
 @RequestMapping("/region")
 /*Elle est utilisée pour traiter les requêtes HTTP avec des modèles d’URL spécifiés.
 Il est utilisé dans et avec les @Controller et les @RestController.*/
-@AllArgsConstructor
 
 @Api(value = "hello", description = "Methodes sur Region")
 public class RegionController {
+    private String postImageName;
     @Autowired
     RegionService regionService;
     @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     //*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*//*
-    public ResponseEntity<?> ajout(@RequestBody Region region,@RequestBody String postImageName){
+    public ResponseEntity<?> ajout(@RequestParam HashMap<String, String> request,@RequestParam("image") MultipartFile multipartFile){
+
         postImageName = RandomStringUtils.randomAlphabetic(10);
         try {
-            regionService.ajout(region, postImageName);
+            regionService.saveRegionImage(multipartFile, postImageName);
+            Region region = regionService.ajout(request, postImageName);
+            String coderegion = request.get("coderegion");
+            String nomregion = request.get("nomregion");
+            String activité = request.get("activité");
+            String langue = request.get("langue");
+            String description = request.get("description");
+            String superficie = request.get("superficie");
+            region.setCoderegion(coderegion);
+            region.setNomregion(nomregion);
+            region.setActivité(activité);
+            region.setLangue(langue);
+            region.setDescription(description);
+            region.setSuperficie(superficie);
             System.out.println("Region Ajouté");
             return new ResponseEntity<>(region, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Une erreur est survenue: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Une erreur est survenue: \" + e.getMessage(), HttpStatus.BAD_REQUEST", HttpStatus.BAD_REQUEST);
         }
 
-
+//        try {
+//            Region region = regionService.ajout(request, postImageName);
+//            System.out.println("Region Ajouté");
+//            return new ResponseEntity<>(region, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>("Une erreur est survenue: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+//        }
     }
-
 
     @ApiOperation(value = "afficher la liste des regions ")
     @GetMapping("/mylist")
@@ -76,6 +97,15 @@ public class RegionController {
             return new ResponseEntity<>(region, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Une erreur est survenue: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping("/image/upload")
+    public ResponseEntity<String> fileUpload(@RequestParam("image") MultipartFile multipartFile) {
+        try {
+            regionService.saveRegionImage(multipartFile, postImageName);
+            return new ResponseEntity<>("image de la region enregistrer!", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("image de la region n'a pas pu etre enregistrer!", HttpStatus.BAD_REQUEST);
         }
     }
 
