@@ -28,6 +28,7 @@ public class CommentaireServiceImpl implements CommentaireService {
         commentaire.setContenu(contenu);
         commentaire.setUtilisateur(utilisateur);
         commentaire.setDate(new Date());
+        region.setCommentaires(commentaire);
         commentaireRepository.save(commentaire);
     }
 

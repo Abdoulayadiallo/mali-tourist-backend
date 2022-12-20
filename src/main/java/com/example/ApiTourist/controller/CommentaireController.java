@@ -28,8 +28,8 @@ public class CommentaireController {
     private CommentaireService commentaireService;
     @PostMapping("/add")
     public ResponseEntity<?> addComment(@RequestBody HashMap<String, String> request) {
-        String regionId = request.get("regionId");
-        Region region = regionService.getPostById(Long.parseLong(regionId));
+        String regionId = request.get("id");
+        Region region = regionService.getRegionById(Long.valueOf(regionId));
         if (region == null) {
             return new ResponseEntity<>("region non trouvé", HttpStatus.NOT_FOUND);
         }

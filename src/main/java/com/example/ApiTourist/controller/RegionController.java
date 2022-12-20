@@ -88,7 +88,7 @@ public class RegionController {
     @ApiOperation(value = "Supprimer une region par Id")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteRegion(@PathVariable("id") Long id) {
-        Region region = regionService.getPostById(id);
+        Region region = regionService.getRegionById(id);
         if (region == null) {
             return new ResponseEntity<>("region non trouvé", HttpStatus.NOT_FOUND);
         }

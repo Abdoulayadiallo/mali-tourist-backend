@@ -17,5 +17,6 @@ public interface RegionService {
 
     String saveRegionImage(MultipartFile multipartFile, String fileName);
 
-    Region getPostById(Long id);
+    Region getRegionById(Long id);
+
 }

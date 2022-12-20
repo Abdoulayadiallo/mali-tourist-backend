@@ -93,7 +93,7 @@ public class RegionImpl implements RegionService {
     }
 
     @Override
-    public Region getPostById(Long id) {
+    public Region getRegionById(Long id) {
         return regionRepository.findRegionById(id);
     }
 }
