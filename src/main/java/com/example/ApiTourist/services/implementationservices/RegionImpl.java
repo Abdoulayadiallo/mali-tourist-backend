@@ -23,10 +23,9 @@ public class RegionImpl implements RegionService {
     @Autowired
     RegionRepository regionRepository;
     @Override
-    public Region ajout(HashMap<String,String> request, String postImageName) {
+    public Region ajout(Region region, String postImageName) {
        // String caption = request.get("caption");
        // String location = request.get("location");
-        Region region = new Region();
         region.setImage(postImageName);
         /*post.setCaption(caption);
         post.setLocation(location);

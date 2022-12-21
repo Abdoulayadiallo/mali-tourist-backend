@@ -3,6 +3,8 @@ package com.example.ApiTourist.controller;
 
 import com.example.ApiTourist.model.Region;
 import com.example.ApiTourist.services.RegionService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -33,25 +35,14 @@ public class RegionController {
     @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     //*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*//*
-    public ResponseEntity<?> ajout(@RequestParam HashMap<String, String> request,@RequestParam("image") MultipartFile multipartFile){
+    public ResponseEntity<?> ajout(@RequestParam("region") String reg,@RequestParam("image") MultipartFile multipartFile) throws JsonProcessingException {
 
+
+        Region region= new JsonMapper().readValue(reg,Region.class);
         postImageName = RandomStringUtils.randomAlphabetic(10);
         try {
             regionService.saveRegionImage(multipartFile, postImageName);
-            Region region = regionService.ajout(request, postImageName);
-            String coderegion = request.get("coderegion");
-            String nomregion = request.get("nomregion");
-            String activité = request.get("activité");
-            String langue = request.get("langue");
-            String description = request.get("description");
-            String superficie = request.get("superficie");
-            region.setCoderegion(coderegion);
-            region.setNomregion(nomregion);
-            region.setActivité(activité);
-            region.setLangue(langue);
-            region.setDescription(description);
-            region.setSuperficie(superficie);
-            System.out.println("Region Ajouté");
+            regionService.ajout(region,postImageName);
             return new ResponseEntity<>(region, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Une erreur est survenue: \" + e.getMessage(), HttpStatus.BAD_REQUEST", HttpStatus.BAD_REQUEST);

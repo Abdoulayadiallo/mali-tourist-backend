@@ -22,6 +22,8 @@ public class Pays implements Serializable {
     @Column(columnDefinition = "text")
     private String description;
 
+    private String  superficie;
+
    // @OneToMany(mappedBy = "pays")
     //List<Region> regionList;
 

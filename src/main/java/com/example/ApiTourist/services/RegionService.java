@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface RegionService {
-    Region ajout(HashMap<String,String> request, String postImageName);
+    Region ajout(Region region, String postImageName);
 
     List<Region> lister();
     Region Modifier(Region region , Long id);

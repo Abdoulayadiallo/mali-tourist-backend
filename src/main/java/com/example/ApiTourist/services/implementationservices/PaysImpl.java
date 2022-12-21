@@ -28,6 +28,7 @@ public class PaysImpl implements PaysService {
     public Pays Modifier(Pays pays,Long id_pays) {
         Pays pays1=this.paysRepository.findById(id_pays).orElseThrow();
         pays1.setNom_pays(pays.getNom_pays());
+        pays1.setSuperficie(pays.getSuperficie());
 
         return paysRepository.save(pays1);
 
